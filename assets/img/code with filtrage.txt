@@ -1,0 +1,42 @@
+const int numReadings = 10; // Number of readings for the moving average filter
+int readings[numReadings];  // Array to store analog readings
+int readIndex = 0;          // Current reading index
+int total = 0;              // Running total of all readings
+int average = 0;            // The calculated average of the readings
+
+void setup() { 
+  Serial.begin(9600);
+  pinMode(10, INPUT); // Setup for leads off detection LO+
+  pinMode(9, INPUT);  // Setup for leads off detection LO-
+
+  // Initialize the readings array
+  for (int i = 0; i < numReadings; i++) {
+    readings[i] = 0; // Initialize all readings to zero
+  }
+}
+
+void loop() {
+  // Check for leads-off condition (digital pins 10 and 9)
+  if ((digitalRead(10) == HIGH) || (digitalRead(9) == HIGH)) {
+    Serial.println("Leads off!");
+  } else {
+    // Subtract the oldest reading
+    total -= readings[readIndex];
+
+    // Read a new value from the analog pin and add it to the total
+    readings[readIndex] = analogRead(A0);
+    total += readings[readIndex];
+
+    // Advance to the next reading index
+    readIndex = (readIndex + 1) % numReadings;
+
+    // Calculate the moving average
+    average = total / numReadings;
+
+    // Print the smoothed analog value
+    Serial.println(average);
+  }
+
+  // Wait for a short period before taking the next reading
+  delay(10);
+}

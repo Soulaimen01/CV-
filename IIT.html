@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- =====BOX ICONS===== -->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Portfolio website complete</title>
+</head>
+<body>
+    <!--===== HEADER =====-->
+    <header class="l-header">
+        <nav class="nav bd-grid">
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html#home" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="index.html#about" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="index.html#journey" class="nav__link">Journey</a></li>
+                    <li class="nav__item"><a href="index.html#skills" class="nav__link">Skills</a></li>
+                    <li class="nav__item"><a href="index.html#work" class="nav__link">Experience</a></li>
+                    <li class="nav__item"><a href="index.html#projects" class="nav__link">Projects</a></li>
+                    <li class="nav__item"><a href="index.html#Languages" class="nav__link">Languages</a></li>
+                    <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>                        
+                    <li class="nav__item"><a href="IIT.html" class="nav__link">IIT</a></li>
+                    <li class="nav__item"><a href="QUIZ.html" class="nav__link">QUIZ</a></li>                       
+                </ul>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </nav>
+    </header>
+    
+<!--===== IMAGE CAROUSEL SECTION =====-->
+<section class="image-section">
+    <div class="carousel-container">
+        <!-- Image -->
+        <div class="image-container">
+            <img src="assets/img/highschool.jpg" alt="Image 1" class="image" id="carousel-image">
+        </div>
+        
+        <!-- Description -->
+        <div class="description-container">
+            <h2 class="image-title" id="carousel-title">International Institute of Technology</h2>
+            <p class="image-description" id="carousel-description">
+                Founded in 2012, IIT offers an innovative education model in partnership with universities and schools at the national and international level, by implementing a semester-based organization and programs inspired by the North American model.
+            </p>
+        </div>
+        
+        <!-- Arrows -->
+        <button class="arrow left-arrow" id="prev-btn">❮</button>
+        <button class="arrow right-arrow" id="next-btn">❯</button>
+    </div>
+</section>
+
+<style>
+/* Styles for the carousel section */
+.image-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 80px 20px;
+    position: relative;
+}
+.carousel-container {
+    width: 60%; /* Fix the width of the carousel */
+    max-width: 600px;
+    position: relative;
+}
+.image-container {
+    overflow: hidden;
+}
+.image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.description-container {
+    margin-top: 10px; /* Space between the image and the description */
+}
+.image-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.image-description {
+    font-size: 1rem;
+    color: #555;
+    margin: 0;
+}
+.arrow {
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #333;
+    z-index: 1; /* Make sure arrows appear above content */
+}
+.left-arrow {
+    left: -40px; /* Adjust left arrow positioning */
+}
+.right-arrow {
+    right: -40px; /* Adjust right arrow positioning */
+}
+.arrow:hover {
+    color: #000;
+}
+</style>
+
+<script>
+/* JavaScript for the carousel functionality */
+const images = [
+    {
+        src: "assets/img/highschool.jpg",
+        title: "International Institute of Technology",
+        description: "Founded in 2012, IIT offers an innovative education model in partnership with universities and schools at the national and international level, by implementing a semester-based organization and programs inspired by the North American model."
+    },
+    {
+        src: "assets/img/temoingage.png",
+        title: "Testimony on IIT",
+        description: "My journey at IIT from 2021 to 2024 in Computer Science was incredibly enriching. It allowed me to develop solid skills in programming and problem-solving. IIT is a space where I grew both academically and personally, supported by a strong community."
+    },
+   
+];
+
+let currentIndex = 0;
+
+// DOM elements
+const imageElement = document.getElementById("carousel-image");
+const titleElement = document.getElementById("carousel-title");
+const descriptionElement = document.getElementById("carousel-description");
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
+
+// Update carousel content
+function updateCarousel(index) {
+    const item = images[index];
+    imageElement.src = item.src;
+    titleElement.textContent = item.title;
+    descriptionElement.textContent = item.description;
+}
+
+// Event listeners
+prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateCarousel(currentIndex);
+});
+
+nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateCarousel(currentIndex);
+});
+
+// Initialize carousel
+updateCarousel(currentIndex);
+</script>
